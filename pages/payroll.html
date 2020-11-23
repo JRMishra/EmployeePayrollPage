@@ -7,12 +7,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/payroll_style.css">
-  <script defer src="../js/payroll.js"></script>
+  <script defer src="../js/payrollForm.js"></script>
+  <script defer src="../js/payrollModel.js"></script>
   <title>Employee Payroll Form</title>
 </head>
 
 <body>
-  <!-- UC 1 -->
   <header class="header-content header">
     <div class="logo-content">
       <img class="logo-content-img" src="../assets/images/logo.png" alt="logo">
@@ -28,6 +28,7 @@
     <div class="row-content">
         <label class="label text" for="name">Name</label>
         <input class="input" type="text" id="name" name="name" placeholder="Your name.." required>
+        <error-output id="name-error" for="name"></error-output>
     </div>
     <div class="row-content">
         <label class="label text" for="profile">Profile image</label>
