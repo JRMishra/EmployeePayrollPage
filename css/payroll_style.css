@@ -1,3 +1,4 @@
+/* UC1 */
 body{
     margin: 0;
     height: 100%;
@@ -33,7 +34,7 @@ body{
     font: normal normal bold 20px/25px Montserrat;
     font-family: "Montserrat", sans-serif;
     letter-spacing: 0px;
-    color: #1a1dda;
+    color: #3d22a8;
     text-transform: capitalize;
 }
 
@@ -45,9 +46,10 @@ body{
     box-sizing: border-box;
 }
 
+/* UC2 */
 .form-content {
     min-height: calc(100% - 80px);
-    background-color: #e2fdda;
+    background-color: #d6d7ec;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -104,3 +106,21 @@ label {
     border-radius: 4px;
     resize: vertical;
 }
+
+/* UC3 */
+.profile-radio-content {
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-radio-content>label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.profile {
+    width: 40px;
+    border-radius: 50%;
+    margin-left: 12px;
+} 
