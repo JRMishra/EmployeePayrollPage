@@ -1,19 +1,30 @@
-const salary=document.querySelector('#salary');
-const output=document.querySelector('.salary-output');
-output.textContent=salary.value;
-salary.addEventListener('input',function(){
+window.addEventListener('DOMContentLoaded' , (event)=> {
+    const name = document.querySelector('#name');
+    const nameError = document.querySelector('#name-error');
+
+    name.addEventListener('input', function () {
+    if(name.value.length == 0)
+    {
+        nameError.textContent = "";
+        return;
+    }
+    try{
+        (new PayrollModel()).name = name.value;
+        nameError.textContent = "";
+    }
+    catch(e){
+        nameError.textContent = e
+    }
+    });
+
+    const salary=document.querySelector('#salary');
+    const output=document.querySelector('.salary-output');
     output.textContent=salary.value;
+    salary.addEventListener('input',function(){
+        output.textContent=salary.value;
+    });
 });
 
-const name = document.querySelector('#name');
-const nameError = document.querySelector('#name-error');
-name.addEventListener('input', function () {
-    let namRegex = new RegExp(/^[A-Z][a-z]{2,}([ ][A-Za-z]{2,})?$/);
-    if (namRegex.test(name.value))
-        nameError.textContent = "";
-    else
-        nameError.textContent = "Name is Incorrect";
-});
 function save(){
     try{    
         let employeepayrollData = createEmployeePayroll();
@@ -71,3 +82,23 @@ function getElementValueById(id){
     let value = document.getElementById(id).value
     return value;
 } 
+
+const resetForm = () => {
+    document.querySelector("#name").value = "";
+    unsetSelectedValues("[name=profile]");
+    unsetSelectedValues("[name=gender]");
+    unsetSelectedValues("[name=department]");
+    document.querySelector(".salary-output").textContent=400000;
+    document.querySelector("#day").value = 01;
+    document.querySelector("#month").value = 01;
+    document.querySelector("#year").value = 2020;
+    document.querySelector("#notes").value= "";
+    document.querySelector(".date-error").textContent = "";
+}
+
+const unsetSelectedValues = (propertyValue) => {
+    let allItems = document.querySelectorAll(propertyValue);
+    allItems.forEach(item=>{
+        item.checked = false;
+    });
+}

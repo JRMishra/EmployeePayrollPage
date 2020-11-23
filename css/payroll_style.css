@@ -204,3 +204,9 @@ select {
         align-items: flex-start;
     } 
 }
+
+error-output{
+    color: red;
+    font-size: 14px;
+    margin-left: 5px;
+}

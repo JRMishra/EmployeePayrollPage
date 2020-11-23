@@ -3,7 +3,7 @@ class PayrollModel {
         return this._name;
     }
     set name(name) {
-        let nameRegex = RegExp('^[A-Z]{1}[a-zA-Z]{2,}$');
+        let nameRegex = RegExp('^[A-Z][a-z]{2,}([ ][A-Za-z]{2,})?$');
         if (nameRegex.test(name))
             this._name = name;
         else {
