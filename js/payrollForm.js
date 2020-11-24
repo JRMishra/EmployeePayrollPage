@@ -51,6 +51,7 @@ function createEmployeePayroll()
     empPayroll.push(employeepayrollData)
     alert("Your entry is successfully done");
     alert(empPayroll);
+    return empPayroll;
 }
 
 function createAndUpdateStorage(employeepayrollData){
@@ -58,7 +59,7 @@ function createAndUpdateStorage(employeepayrollData){
     if(employeePayrollList != undefined)
         employeePayrollList.push(employeepayrollData);
     else
-        employeePayrollList = [employeepayrollData];
+        employeePayrollList[0] = [employeepayrollData];
     
     alert("Added Object to the local Storage" + employeePayrollList.toString());
     localStorage.setItem("EmployeePayrollList",JSON.stringify(employeePayrollList));
