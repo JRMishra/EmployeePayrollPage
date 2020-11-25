@@ -1,5 +1,13 @@
+let isUpdate = false;
+let employeePayrollObj = {};
+
 const salary=document.querySelector('#salary');
 const output=document.querySelector('.salary-output');    
+
+window.addEventListener('DOMContentLoaded',(event) => {
+    checkForUpdate();
+});
+
 output.textContent=salary.value;
     salary.addEventListener('input',function(){
         output.textContent=salary.value;
@@ -84,22 +92,88 @@ function getElementValueById(id){
     return value;
 } 
 
-const resetForm = () => {
+function resetForm()
+{
     document.querySelector("#name").value = "";
     unsetSelectedValues("[name=profile]");
     unsetSelectedValues("[name=gender]");
     unsetSelectedValues("[name=department]");
     document.querySelector(".salary-output").textContent=400000;
-    document.querySelector("#day").value = 01;
-    document.querySelector("#month").value = 01;
-    document.querySelector("#year").value = 2020;
+    setSelectedIndex('#day', 0);
+    setSelectedIndex('#month', 0);
+    setSelectedIndex('#year', 0);
     document.querySelector("#notes").value= "";
     document.querySelector(".date-error").textContent = "";
 }
 
-const unsetSelectedValues = (propertyValue) => {
+function unsetSelectedValues(propertyValue)
+{
     let allItems = document.querySelectorAll(propertyValue);
     allItems.forEach(item=>{
         item.checked = false;
     });
+}
+
+function setForm(employeePayrollObj)
+{
+    setValue('#name', employeePayrollObj._name);
+    setSelectedValues('[name=profile]', employeePayrollObj._profile);
+    setSelectedValues('[name=gender]', employeePayrollObj._gender);
+    setCheckBox('[name=department]', employeePayrollObj._department);
+    setValue('#salary', employeePayrollObj._salary);
+    setTextValue('.salary-output', employeePayrollObj._salary);
+    setValue('#notes', employeePayrollObj._notes);
+    let date = stringifyDate(employeePayrollObj._startDate).split("/");
+    setValue('#day', date[0])
+    setValue('#month', date[1])
+    setValue('#year', date[2].split(",")[0]);
+}
+function setSelectedValues(propertyValue, value)
+{
+    let allItems = document.querySelectorAll(propertyValue);
+    allItems.forEach(item => {
+        if (Array.isArray(value)) {
+            if (value.includes(item.value)) {
+                item.checked = true;
+            }
+        }
+        else if (item.value == value)
+            item.checked = true;
+    });
+}
+function setCheckBox(property, values)
+{
+    let items = document.querySelectorAll(property);
+    items.forEach(item => {
+        if (values.includes(item.value)) {
+            item.checked = true;
+        }
+    });
+}
+
+function setSelectedIndex(id, index)
+{
+    const element = document.querySelector(id);
+    element.selectedIndex = index;
+}
+function setTextValue(id, value)
+{
+    const element = document.querySelector(id);
+    element.textContent = value;
+}
+
+function setValue(id, value)
+{
+    const element = document.querySelector(id);
+    element.value = value;
+}
+
+function checkForUpdate()
+{
+    const employeePayrollJson = localStorage.getItem('editEmp');
+    isUpdate = employeePayrollJson ? true : false;
+    if (!isUpdate) return;
+    employeePayrollObj = JSON.parse(employeePayrollJson);
+    
+    setForm(employeePayrollObj);
 }
