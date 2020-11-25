@@ -38,6 +38,8 @@ let empPayroll = [];
 function createEmployeePayroll()
 {
     let employeepayrollData = new PayrollModel();
+    let empPayroll = localStorage.getItem('EmployeePayrollList')?JSON.parse(localStorage.getItem('EmployeePayrollList')):[];
+    employeepayrollData.id = empPayroll.length;
     employeepayrollData.name = getInputValueById('#name');
     employeepayrollData.profile = getSelectedValues('[name = profile]').pop();
     employeepayrollData.gender = getSelectedValues('[name=gender]').pop();

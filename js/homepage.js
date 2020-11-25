@@ -12,6 +12,8 @@ const getEmployeePayrollDataFromStorage = () => {
 
 const createInnerHtml = (employeePayrollList) => {
     const headerHtml = "<tr><th></th><th>Name</th><th>Gender</th><th>Department</th><th>Salary</th><th>Start Date</th><th>Actions</th></tr>"
+    employeePayrollList = localStorage.getItem('EmployeePayrollList')?JSON.parse(localStorage.getItem('EmployeePayrollList')):[];
+    
     if(employeePayrollList.length == 0) 
         return;
     
@@ -26,10 +28,10 @@ const createInnerHtml = (employeePayrollList) => {
             <td>${employeePayrollData._gender}</td>
             <td>${getDeptHtml(employeePayrollData._department)}</td>
             <td>${employeePayrollData._salary}</td>
-            <td>${employeePayrollData._startDate}</td>
+            <td>${stringifyDate(employeePayrollData._startDate)}</td>
             <td>
-                <img name="${employeePayrollData._id}" onclick="remove(this)" alt="delete" src="../assets/icons/delete-black-18dp.svg">
-                <img name="${employeePayrollData._id}" alt="edit" onclick="update(this)" src="../assets/icons/create-black-18dp.svg">
+                <img id="${employeePayrollData._id}" onclick="remove(${employeePayrollData._id})" alt="delete" src="../assets/icons/delete-black-18dp.svg">
+                <img id="${employeePayrollData._id}" alt="edit" onclick="update(this)" src="../assets/icons/create-black-18dp.svg">
             </td>
         </tr>`;
     document.querySelector('#display').innerHTML = innerHtml;
@@ -68,3 +70,18 @@ const getDeptHtml = (deptList) => {
     }
     return deptHtml;
 }
+
+const remove = (empId) => {
+    let employeePayrollList = localStorage.getItem('EmployeePayrollList')?JSON.parse(localStorage.getItem('EmployeePayrollList')):[];
+    
+    let employeePayrollData = employeePayrollList.find(empData => empData._id == empId);
+    if(!employeePayrollData) return;
+    const index = employeePayrollList
+                    .map(empData => empData._id)
+                    .indexOf(employeePayrollData._id);
+    employeePayrollList.splice(index, 1);
+    localStorage.setItem("EmployeePayrollList", JSON.stringify(employeePayrollList));
+    document.querySelector('.emp-count').textContent = employeePayrollList.length;
+    createInnerHtml();
+    self.location['reload']();
+} 

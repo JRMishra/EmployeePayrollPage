@@ -1,4 +1,11 @@
 class PayrollModel {
+    get id(){
+        return this._id;
+    }
+    set id(id){
+        this._id = id;
+    }
+
     get name() {
         return this._name;
     }
@@ -51,7 +58,7 @@ class PayrollModel {
         return this._notes;
     }
     set note(note) {
-        this._note = note;
+        this._note = notes;
     }
     get id() {
         return this._id;
@@ -60,6 +67,6 @@ class PayrollModel {
         this._id = id;
     }
     toString() {
-        return "Id = " + this.id + "\nName = " + this.name + "\nSalary = " + this.salary + "\nGender = " + this.gender + " \nStartdate = " + this.startDate + "\nDepartments = " + this.department + "\nProfile = " + this.profile + "\nNote = " + this.note;
+        return "Id = " + this._id + "\nName = " + this._name + "\nSalary = " + this._salary + "\nGender = " + this._gender + " \nStartdate = " + this._startDate + "\nDepartments = " + this._department + "\nProfile = " + this._profile + "\nNote = " + this._note;
     }
 } 
