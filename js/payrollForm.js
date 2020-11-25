@@ -1,29 +1,27 @@
-window.addEventListener('DOMContentLoaded' , (event)=> {
-    const name = document.querySelector('#name');
-    const nameError = document.querySelector('#name-error');
-
-    name.addEventListener('input', function () {
-    if(name.value.length == 0)
-    {
-        nameError.textContent = "";
-        return;
-    }
-    try{
-        (new PayrollModel()).name = name.value;
-        nameError.textContent = "";
-    }
-    catch(e){
-        nameError.textContent = e
-    }
-    });
-
-    const salary=document.querySelector('#salary');
-    const output=document.querySelector('.salary-output');
-    output.textContent=salary.value;
+const salary=document.querySelector('#salary');
+const output=document.querySelector('.salary-output');    
+output.textContent=salary.value;
     salary.addEventListener('input',function(){
         output.textContent=salary.value;
     });
+
+const name = document.querySelector('#name');
+const nameError = document.querySelector('#name-error');
+name.addEventListener('input', function () {
+if(name.value.length == 0)
+{
+    nameError.textContent = "";
+    return;
+}
+try{
+    (new PayrollModel()).name = name.value;
+    nameError.textContent = "";
+}
+catch(e){
+    nameError.textContent = e
+}
 });
+
 
 function save(){
     try{    
@@ -45,13 +43,13 @@ function createEmployeePayroll()
     employeepayrollData.gender = getSelectedValues('[name=gender]').pop();
     employeepayrollData.department = getSelectedValues('[name=department]');
     employeepayrollData.salary = getInputValueById('#salary');
-    employeepayrollData.note = getInputValueById('#notes');
+    //employeepayrollData.note = getInputValueById('notes').value;
     let date = getInputValueById('#year') + "-"+ getInputValueById('#month') + "/" + getInputValueById('#day');
     employeepayrollData.startDate = new Date(date);
     empPayroll.push(employeepayrollData)
     alert("Your entry is successfully done");
     alert(empPayroll);
-    return empPayroll;
+    return employeepayrollData;
 }
 
 function createAndUpdateStorage(employeepayrollData){
@@ -59,7 +57,7 @@ function createAndUpdateStorage(employeepayrollData){
     if(employeePayrollList != undefined)
         employeePayrollList.push(employeepayrollData);
     else
-        employeePayrollList[0] = [employeepayrollData];
+        employeePayrollList = [employeepayrollData];
     
     alert("Added Object to the local Storage" + employeePayrollList.toString());
     localStorage.setItem("EmployeePayrollList",JSON.stringify(employeePayrollList));

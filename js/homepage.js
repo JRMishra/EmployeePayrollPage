@@ -17,7 +17,7 @@ const createInnerHtml = (employeePayrollList) => {
     
     let innerHtml = `${headerHtml}`;
     //let employeePayrollList = createEmployeePayrollJSON();
-    for(const employeePayrollData of employeePayrollList[0])
+    for(const employeePayrollData of employeePayrollList)
     {
         innerHtml =`${innerHtml}
         <tr>
